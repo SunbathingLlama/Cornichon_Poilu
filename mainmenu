@@ -1,0 +1,137 @@
+--background's sreen fit
+_H = display.actualContentWidth
+_W = display.actualContentHeight
+
+--creates mainMenu group
+local mainMenu = display.newGroup()
+
+--clears the menu screen
+local function menuClear()
+    mainMenu.isVisible = false
+end
+
+--play_bnt's onEvent function 
+local function playFunction( event )
+    if("ended" == event.phase) then
+        menuClear()
+        local game = require("learg")
+    end
+end
+
+--option_bnt's onEvent function
+local function optionFunction(event)
+    if("ended" == event.phase) then
+        menuClear()
+        local optionfile = require("option")
+    end
+end
+
+--instruction_bnt's onEvent function
+local function instructionFunction( event )
+    if("ended" == event.phase) then
+        menuClear()
+        local instructionfile = require("instruction")
+    end
+end
+
+--record_bnt's onEvent function 
+local function recordFunction( event )
+    if("ended" == event.phase) then
+        menuClear()
+        local recordfile = require("record")
+    end
+end
+
+--credits_bnt's onEvent function
+local function creditsFunction( event )
+    if("ended" == event.phase) then
+        menuClear()
+        local creditsfile = require("credit")
+    end
+end
+
+--background
+local bg = display.newImageRect("mainmenu.jpg", _H, _W)
+bg.x = display.contentCenterX
+bg.y = display.contentCenterY
+
+--launches the widget mondule
+local widget = require( "widget" )
+
+--option buttton
+local option_bnt = widget.newButton
+{
+    x = 310,
+    y = 265,
+    width = 150,
+    height = 100,
+    defaultFile = "optionsbutton.png",
+    overFile = "optionsbuttonover.png",
+    onEvent = optionFunction
+}
+
+--instruction button
+local instruction_bnt = widget.newButton
+{
+    x = 25,
+    y = 270,
+    width = 150,
+    height = 100,
+    defaultFile = "instructionbutton.png",
+    overFile = "instructionbuttonover.png",
+    onEvent = instructionFunction
+}
+
+--play button
+local play_bnt = widget.newButton
+{
+    x = 260,
+    y = 65,
+    width = 125,
+    height = 75,
+    defaultFile = "playbttn.png",
+    overFile = "playbttnover.png",
+    onEvent = playFunction
+}    
+
+--record button
+local record_bnt = widget.newButton
+{
+    x = 160,
+    y = 290,
+    width = 130,
+    height = 50,
+    defaultFile = "scorebutton.png",
+    overFile = "scorebuttonover.png",
+    onEvent = recordFunction
+}
+
+--credit button
+local credits_bnt = widget.newButton 
+{
+    x = 450,
+    y = 283,
+    width = 100,
+    height = 50,
+    defaultFile = "cred.png",
+    overFile = "credover.png",
+    onEvent = creditsFunction    
+}
+
+--get in front of bg
+option_bnt:toFront()
+instruction_bnt:toFront()
+play_bnt:toFront()
+record_bnt:toFront()
+credits_bnt:toFront()
+
+--add objects to group mainMenu
+mainMenu:insert( bg )
+mainMenu:insert(record_bnt)
+mainMenu:insert(play_bnt)
+mainMenu:insert(instruction_bnt)
+mainMenu:insert(option_bnt)
+mainMenu:insert(credits_bnt)
+
+
+
